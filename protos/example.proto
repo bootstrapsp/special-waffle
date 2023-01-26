@@ -12,6 +12,9 @@ service Example {
 
   // GetIoTDataStream example of server stream, where client sends a request and server responds back with stream of data. Call remains open as long as server is sending the data, after which server closes the stream with NIL or EOF.
   rpc GetIoTDataStream (GetIoTDataStreamReq) returns(stream GetIoTDataStreamRes){};
+
+  // GetIoTDataBiDiStream enables bi-directional stream to send and receive data from ThingWorx server. This is useful when you want to send data to ThingWorx server and receive data from ThingWorx server at the same time.
+  rpc GetIoTDataBiDiStream (stream GetIoTDataStreamReq) returns(stream GetIoTDataStreamRes){};
 }
 // GetIoTDataReq defines message struct for client request
 message GetIoTDataReq{
