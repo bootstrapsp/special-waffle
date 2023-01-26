@@ -1,0 +1,5 @@
+syntax = "proto3";
+package thingworxinterface;
+option go_package = "github.com/special-waffle/thingworxinterface";
+
+// Demonstrates set of example API endpoint group definition and types of APIs that are available within the
