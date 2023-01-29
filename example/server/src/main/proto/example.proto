@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+
+package example.protobuf;
+
+option go_package = "src/go/generated";
+
+
+service Example {
+  // GetIoTData example of unary call, where client sends one request and server responds back with a request and call is closed.
+  rpc GetIoTData(GetIoTDataReq) returns(GetIoTDataRes){};
+
+  // GetIoTDataStream example of server stream, where client sends a request and server responds back with stream of data. Call remains open as long as server is sending the data, after which server closes the stream with NIL or EOF.
+  rpc GetIoTDataStream (GetIoTDataStreamReq) returns(stream GetIoTDataStreamRes){};
+
+  // GetIoTDataBiDiStream enables bi-directional stream to send and receive data from ThingWorx server. This is useful when you want to send data to ThingWorx server and receive data from ThingWorx server at the same time.
+  rpc GetIoTDataBiDiStream (stream GetIoTDataStreamReq) returns(stream GetIoTDataStreamRes){};
+}
+// GetIoTDataReq defines message struct for client request
+message GetIoTDataReq{
+  IoTThing device = 1;
+}
+// GetIoTDataRes defines message struct for server response
+message GetIoTDataRes{
+  repeated IoTData data = 1; // repeated keyword is used to create array or slice (in go terminology) of a given structure
+}
+// IoTData shows example of message structure that can be used across multiple other messages
+message IoTData{
+  int32 anyInt32Val = 1;
+  int64 anyInt64Val = 2;
+  string anyStringVal = 3;
+  bool anyBoolVal = 4;
+}
+// GetIoTDataStreamReq is a request message structure
+message GetIoTDataStreamReq{
+  IoTThing device = 1;
+}
+// GetIoTDataStreamReq is a response message structure
+message GetIoTDataStreamRes{
+  IoTData data = 1;
+}
+
+// IoTThing is a message structure reused across multiple messages
+// In this example it shows the structure for the Device
+message IoTThing {
+  string name = 1;
+}
