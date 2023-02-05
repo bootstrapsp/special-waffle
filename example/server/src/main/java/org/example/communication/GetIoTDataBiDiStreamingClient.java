@@ -18,7 +18,7 @@ public class GetIoTDataBiDiStreamingClient implements StreamObserver<ExampleOute
 
     @Override
     public void onNext(ExampleOuterClass.GetIoTDataStreamRes value) {
-
+        System.out.println("Got response: " + value);
     }
 
     @Override
